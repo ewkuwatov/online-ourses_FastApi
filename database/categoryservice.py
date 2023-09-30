@@ -6,7 +6,9 @@ from database import get_db
 def add_category_db(id, name):
     db = next(get_db())
 
-    new_category = CourseCategory(id=id, name=name, publish_date=datetime.now())
+    new_category = CourseCategory(id=id,
+                                  name=name,
+                                  publish_date=datetime.now())
 
     db.add(new_category)
     db.commit()
