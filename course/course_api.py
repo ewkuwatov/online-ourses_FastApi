@@ -4,7 +4,7 @@ from course import Course, EditCourse
 
 from database.courseservice import add_course_db, edit_course_db, delete_course_db, get_all_course_db
 
-course_router = APIRouter(prefix='/course', tags=['Работа с курсами'])
+course_router = APIRouter(prefix='/course', tags=['Работа с курсом'])
 
 @course_router.post('/public_course')
 async def public_course(data: Course):
