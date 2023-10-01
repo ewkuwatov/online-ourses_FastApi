@@ -7,8 +7,7 @@ def add_category_db(id, name):
     db = next(get_db())
 
     new_category = CourseCategory(id=id,
-                                  name=name,
-                                  publish_date=datetime.now())
+                                  name=name)
 
     db.add(new_category)
     db.commit()
@@ -24,12 +23,14 @@ def edit_category_db(category_id, new_name):
         exact_category.name = new_name
         db.commit()
 
+        return "Успешно изменено"
+
     return False
 
-def delete_categoryt_db(post_id):
+def delete_categoryt_db(category_id):
     db = next(get_db())
 
-    exact_category = db.query(CourseCategory).filter_by(id=post_id).first()
+    exact_category = db.query(CourseCategory).filter_by(id=category_id).first()
 
     if exact_category:
         db.delete(exact_category)
@@ -39,7 +40,7 @@ def delete_categoryt_db(post_id):
 
     return False
 
-def get_all_posts_db():
+def get_all_category_db():
     db = next(get_db())
 
     all_category = db.query(CourseCategory).all()

@@ -1,9 +1,8 @@
 from pydantic import BaseModel
 
 class Course(BaseModel):
-    category_id: int
+    id: int
     name: str
-    description: str
     price: str
 
 
