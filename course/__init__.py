@@ -4,6 +4,7 @@ class Course(BaseModel):
     id: int
     name: str
     price: str
+    category: int
 
 
 class EditCourse(BaseModel):

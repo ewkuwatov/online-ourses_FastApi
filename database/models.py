@@ -26,5 +26,5 @@ class Course(Base):
     id = Column(Integer, autoincrement=True, primary_key=True)
     name = Column(String)
     price = Column(String)
-    category = Column(String, ForeignKey(CourseCategory.id))
+    category = Column(Integer, ForeignKey(CourseCategory.id))
     course_photo = Column(String)

@@ -3,10 +3,10 @@ from datetime import datetime
 from database.models import Course
 from database import get_db
 
-def add_course_db(id, name, price):
+def add_course_db(id, name, price, category):
     db = next(get_db())
 
-    new_course = Course(id=id, name=name, price=price)
+    new_course = Course(id=id, name=name, price=price, category=category)
 
     db.add(new_course)
     db.commit()
