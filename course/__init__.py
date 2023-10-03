@@ -1,14 +1,15 @@
 from pydantic import BaseModel
 
 class Course(BaseModel):
-    id: int
     name: str
     price: str
-    category: int
-
+    category: str
 
 class EditCourse(BaseModel):
+    name: str
     new_name: str
-    new_description: str
     new_price: str
-    course_id: int
+
+class EditCourseCategory(BaseModel):
+    name: str
+    new_category: str

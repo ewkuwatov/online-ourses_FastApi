@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from user import RegisterUserModel, LoginUserModel, EditUserModel
 
-from database.userservice import login_user_db, register_user_db
+from database.userservice import login_user_db, register_user_db, change_info_db
 
 
 user_router = APIRouter(prefix='/user', tags=['Управление пользователями'])
@@ -23,5 +23,11 @@ async def register_user(data: RegisterUserModel):
 
 @user_router.put('/change_info')
 async def change_info(data: EditUserModel):
-    pass
+    result = change_info_db(**data.model_dump())
+
+    if result:
+        return {'status': 1, 'message': result}
+
+    return {'status': 0, 'message': 'Пользователь с такой именем нет'}
+
 

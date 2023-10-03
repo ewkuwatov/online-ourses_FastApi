@@ -22,8 +22,8 @@ async def change_category(data: EditCourseCategory):
     return {'status': 0, 'message': 'Категория не найден'}
 
 @category_router.delete('/delete_category')
-async def delete_category(category_id: int):
-    result = delete_categoryt_db(category_id)
+async def delete_category(name: str):
+    result = delete_categoryt_db(name)
 
     if result:
         return {'status': 1, 'message': result}

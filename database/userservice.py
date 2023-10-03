@@ -51,8 +51,22 @@ def add_profile_photo_db(user_id, photo):
 
 
 # Изменить данные
-def change_info_db(user_id, edit_data, new_data):
-    pass
+def change_info_db(name, new_name, new_surname, new_email, new_phone_number, new_password):
+    db = next(get_db())
+
+    exact_user = db.query(User).filter_by(name=name).first()
+
+    if exact_user:
+        exact_user.name = new_name
+        exact_user.surname = new_surname
+        exact_user.email = new_email
+        exact_user.phone_number = new_phone_number
+        exact_user.password = new_password
+        db.commit()
+
+        return "Успешно изменено"
+
+    return False
 
 # Удалить фото профиля
 def delete_profile_photo_db(user_id):

@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
-from course import Course, EditCourse
+from course import Course, EditCourse, EditCourseCategory
 
-from database.courseservice import add_course_db, edit_course_db, delete_course_db, get_all_course_db
+from database.courseservice import add_course_db, edit_course_db, edit_course_category_db, delete_course_db, get_all_course_db
 
 course_router = APIRouter(prefix='/course', tags=['Работа с курсом'])
 
@@ -12,6 +12,7 @@ async def public_course(data: Course):
 
     return {'status': 1, 'message': result}
 
+
 @course_router.put('/change_course')
 async def change_course(data: EditCourse):
     result = edit_course_db(**data.model_dump())
@@ -19,16 +20,25 @@ async def change_course(data: EditCourse):
     if result:
         return {'status': 1, 'message': result}
 
-    return {'status': 0, 'message': 'Категория не найден'}
+    return {'status': 0, 'message': 'Курс не найден'}
 
-@course_router.delete('/delete_course')
-async def delete_course(course_id: int):
-    result = delete_course_db(course_id)
+@course_router.put('/change_course_category')
+async def change_course_category(data: EditCourseCategory):
+    result = edit_course_category_db(**data.model_dump())
 
     if result:
         return {'status': 1, 'message': result}
 
-    return {'status': 0, 'message': 'Категория не найден'}
+    return {'status': 0, 'message': 'Курс не найден'}
+
+@course_router.delete('/delete_course')
+async def delete_course(course_name: str):
+    result = delete_course_db(course_name)
+
+    if result:
+        return {'status': 1, 'message': result}
+
+    return {'status': 0, 'message': 'Курс не найден'}
 
 @course_router.get('/get_all_category')
 async def get_all_category():

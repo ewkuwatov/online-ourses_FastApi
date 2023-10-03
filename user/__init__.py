@@ -15,6 +15,10 @@ class RegisterUserModel(BaseModel):
 
 
 class EditUserModel(BaseModel):
-    user_id: int
-    edit_data: str
-    new_data: str
+    name: str
+    new_name: str
+    new_surname: str
+    new_email: str
+    new_phone_number: str
+    new_password: str
+
