@@ -1,16 +1,14 @@
-from datetime import datetime
-
 from database.models import Course, CourseCategory
 from database import get_db
 
-def add_course_db(name, name1, price, category):
+def add_course_db(name, discription, category, video):
     db = next(get_db())
 
-    category_c = db.query(CourseCategory).filter_by(name=name1).first()
+    category_c = db.query(CourseCategory).filter_by(name=category).first()
 
-    new_course = Course(name=name, price=price, category=category)
+    new_course = Course(name=name, category=category, video=video, discription=discription)
 
-    if new_course.category in category_c.name1:
+    if new_course.category in category_c.name:
         db.add(new_course)
         db.commit()
 
@@ -18,14 +16,16 @@ def add_course_db(name, name1, price, category):
 
     return False
 
-def edit_course_db(name, new_name, new_price):
+def edit_course_db(name, new_name, new_video, new_discription):
     db = next(get_db())
 
     exact_course = db.query(Course).filter_by(name=name).first()
 
     if exact_course:
         exact_course.name = new_name
-        exact_course.price = new_price
+        exact_course.discription = new_discription
+        exact_course.video = new_video
+
         db.commit()
 
         return "Успешно изменено"

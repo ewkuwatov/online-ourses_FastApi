@@ -25,6 +25,9 @@ class Course(Base):
     __tablename__ = 'course'
     id = Column(Integer, autoincrement=True, primary_key=True)
     name = Column(String)
-    price = Column(String, nullable=False)
-    category = Column(String, ForeignKey(CourseCategory.name))
+    discription = Column(String)
     course_photo = Column(String)
+    video = Column(String)
+    category = Column(String, ForeignKey('courses_category.name'))
+
+    category_fk = relationship(CourseCategory, lazy='subquery')
