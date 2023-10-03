@@ -31,3 +31,12 @@ class Course(Base):
     category = Column(String, ForeignKey('courses_category.name'))
 
     category_fk = relationship(CourseCategory, lazy='subquery')
+
+class Comment(Base):
+    __tablename__ = 'comments'
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    user = Column(String)
+    comment = Column(String)
+    course = Column(String, ForeignKey('course.name'))
+
+    course_fk = relationship(Course, lazy='subquery')
